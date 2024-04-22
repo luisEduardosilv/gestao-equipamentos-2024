@@ -1,10 +1,86 @@
-﻿namespace GestaoEquipamentos.ConsoleApp
+﻿using GestaoEquipamentos.ConsoleApp.ModuloEquipamento;
+using System.ComponentModel.Design;
+
+namespace GestaoEquipamentos.ConsoleApp
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            TelaEquipamento telaEquipamento = new TelaEquipamento();
+
+            bool opcaoSairEscolhida = false;
+            
+            while (!opcaoSairEscolhida)
+            {
+                Console.Clear();
+
+                ExibirTitulo();
+
+                Console.WriteLine();
+
+                Console.WriteLine("1 - Gerência de Equipamentos");
+                Console.WriteLine("2 - Controle de Chamados [não disponivel]");
+                Console.WriteLine("S - Sair");
+
+                Console.WriteLine();
+
+                Console.WriteLine("Escolha uma das opções: ");
+                char opcaoEscolhida = Console.ReadLine()[0];
+
+                switch (opcaoEscolhida)
+                {
+                    case '1':
+                        char operacaoEscolhida = telaEquipamento.ApresentarMenu();
+
+                        if (operacaoEscolhida == 'S' || operacaoEscolhida == 's')
+                            break;
+
+                        if (operacaoEscolhida == '1')
+                            telaEquipamento.CadastrarEquipamentos();
+
+                        else if (operacaoEscolhida == '2')
+                            telaEquipamento.EditarEquipamento();
+
+
+                        else if (operacaoEscolhida == '3')
+                            telaEquipamento.ExcluirEquipamento();
+                          
+
+                        else if (operacaoEscolhida == '4')
+                            telaEquipamento.VisualizarEquipamentos(true);
+                        break;
+                    case '2':
+                        break;
+                    
+                    default:
+                        opcaoSairEscolhida = true;
+                        break;
+                }
+            }
+            Console.ReadLine();
+        }
+
+        #region Exibe Titulo
+        private static void ExibirTitulo()
+        {
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("| Gestão de Equipamentos |");
+            Console.WriteLine("--------------------------\n");
+        }
+        #endregion
+
+
+
+        public static void ExibirMensagem(string mensagem, ConsoleColor cor)
+        {
+            Console.ForegroundColor = cor;
+
+            Console.WriteLine();
+
+            Console.WriteLine(mensagem);
+
+            Console.ResetColor();
         }
     }
 }
