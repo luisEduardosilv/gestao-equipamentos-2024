@@ -1,4 +1,5 @@
-﻿using GestaoEquipamentos.ConsoleApp.ModuloEquipamento;
+﻿using GestaoEquipamentos.ConsoleApp.ModuloChamado;
+using GestaoEquipamentos.ConsoleApp.ModuloEquipamento;
 using System.ComponentModel.Design;
 
 namespace GestaoEquipamentos.ConsoleApp
@@ -8,7 +9,8 @@ namespace GestaoEquipamentos.ConsoleApp
         static void Main(string[] args)
         {
             TelaEquipamento telaEquipamento = new TelaEquipamento();
-
+            TelaChamado telaChamado = new TelaChamado();
+            
             bool opcaoSairEscolhida = false;
             
             while (!opcaoSairEscolhida)
@@ -27,11 +29,12 @@ namespace GestaoEquipamentos.ConsoleApp
 
                 Console.WriteLine("Escolha uma das opções: ");
                 char opcaoEscolhida = Console.ReadLine()[0];
+                char operacaoEscolhida;
 
                 switch (opcaoEscolhida)
                 {
                     case '1':
-                        char operacaoEscolhida = telaEquipamento.ApresentarMenu();
+                        operacaoEscolhida = telaEquipamento.ApresentarMenu();
 
                         if (operacaoEscolhida == 'S' || operacaoEscolhida == 's')
                             break;
@@ -51,8 +54,27 @@ namespace GestaoEquipamentos.ConsoleApp
                             telaEquipamento.VisualizarEquipamentos(true);
                         break;
                     case '2':
+                        operacaoEscolhida = telaChamado.ApresentarMenu();
+
+                        if (operacaoEscolhida == 'S' || operacaoEscolhida == 's')
+                            break;
+
+                        if (operacaoEscolhida == '1')
+                            telaEquipamento.CadastrarEquipamentos();
+
+                        else if (operacaoEscolhida == '2')
+                            telaEquipamento.EditarEquipamento();
+
+
+                        else if (operacaoEscolhida == '3')
+                            telaEquipamento.ExcluirEquipamento();
+
+
+                        else if (operacaoEscolhida == '4')
+                            telaEquipamento.VisualizarEquipamentos(true);
                         break;
-                    
+
+                        break;
                     default:
                         opcaoSairEscolhida = true;
                         break;
